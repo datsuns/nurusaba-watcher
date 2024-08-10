@@ -26,16 +26,11 @@
 </script>
 
 <div id={`twitch-embed-${id}`} class="twitch-embed">
-	<div class="live-marker">
-		<LiveStatus {live} />
-	</div>
 </div>
 
 <style>
 	.twitch-embed {
-		width: 500px;
 		aspect-ratio: 16/9;
-		position: relative;
 	}
 
 	.live-marker {
