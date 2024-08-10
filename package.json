@@ -3,14 +3,17 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "npm run smui && vite build",
+		"build": "npm run prepare && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"smui": "npm install --save svelte-material-ui && npm i @smui/layout-grid"
-  },
+		"prepare": "npm run smui && npm run smui-template && npm run smui-theme",
+		"smui": "npm install --save-dev smui-theme && npm i --save-dev @smui/layout-grid && npm i  --save-dev @smui/card",
+		"smui-template": "npx smui-theme template src/theme",
+		"smui-theme": "smui-theme compile static/smui.css -i src/theme"
+	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^5.0.0",
 		"@neoconfetti/svelte": "^2.0.0",
@@ -26,6 +29,7 @@
 		"globals": "^15.0.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
+		"smui-theme": "^7.0.0",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
 		"typescript": "^5.0.0",
