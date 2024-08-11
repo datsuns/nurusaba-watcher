@@ -66,7 +66,7 @@
 </h1>
 <LayoutGrid>
   {#each channelList as channel, i}
-    <Cell  span={2}>
+    <Cell span={2}>
       <TwitchChannelStatus channel={channel} online={liveStatus[i]} name={loadChannelName(channel)} on:customEvent={handleStatusClicked} />
     </Cell>
   {/each}
@@ -79,7 +79,7 @@
         <div class="card-container" id={channel}>
           <Card>
             <h2 class="mdc-typography--headline6" style="margin: 0;">
-              {loadChannelName(channel)}
+              {loadChannelName(channel)} さん
             </h2>
             <div class="embed-entry">
               <TwitchChannelEmbed channel={loadChannelName(channel)} id={i.toString()} live={liveStatus[i]} />

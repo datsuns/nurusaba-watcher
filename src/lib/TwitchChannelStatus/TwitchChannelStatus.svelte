@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import Button, { Label } from '@smui/button';
+  import Card, { PrimaryAction } from '@smui/card';
 
   const dispatch = createEventDispatcher();
 
@@ -14,13 +14,21 @@
 </script>
 
 {#if online}
-  <Button variant="raised" on:click={handleClick}>
-    <Label>{name}</Label>
-  </Button>
+  <Card style="color: #444444; background-color: #5AFF19; align-items: center;">
+    <PrimaryAction on:click={handleClick} >
+      {name} さん
+      <br>
+      ({channel})
+    </PrimaryAction>
+  </Card>
 {:else}
-  <Button  color="secondary" variant="raised"  on:click={handleClick}>
-    <Label>{name}</Label>
-  </Button>
+  <Card style="color: #FFFFFF; background-color: #444444; align-items: center;">
+    <PrimaryAction on:click={handleClick} >
+      {name} さん
+      <br>
+      ({channel})
+    </PrimaryAction>
+  </Card>
 {/if}
 
 <style>
