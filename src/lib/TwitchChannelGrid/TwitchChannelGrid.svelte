@@ -84,7 +84,7 @@
               </a>
             </h2>
             <div class="embed-entry">
-              <TwitchChannelEmbed channel={channel} id={i.toString()} live={liveStatus[i]} />
+              <TwitchChannelEmbed channel={channel} id={i.toString()} />
             </div>
           </Card>
         </div>
@@ -102,7 +102,7 @@
 
   .embed-entry {
     height: 200px;
-    margin: 10px;
+    margin: 0px;
     background-color: var(--mdc-theme-secondary, #333);
     color: var(--mdc-theme-on-secondary, #fff);
   }

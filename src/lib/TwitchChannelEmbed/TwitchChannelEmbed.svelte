@@ -3,12 +3,12 @@
 	import LiveStatus from '../LiveStatus/LiveStatus.svelte';
 
 	export let channel: string;
+	export let id: string;
 	export let width = '100%';
 	export let height = '100%';
 	export let autoplay = true;
 	export let muted = true;
 	export let parent = 'localhost';
-	export let id: string;
 
 	let player: Twitch.Player;
 
