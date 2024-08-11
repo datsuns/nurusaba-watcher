@@ -30,8 +30,22 @@
 
   // 子コンポーネントからのイベントをハンドルする関数
   function handleStatusClicked(event: CustomEvent) {
-    console.log(event.detail.message);
-    scrollToAnchor(event.detail.message);
+    const channel = event.detail.message;
+    channelList.forEach((result, i) => {
+      if ( channel !== channelList[i] ) {
+        return;
+      }
+      if (liveStatus[i] === true ){
+        scrollToAnchor(channel);
+      }
+      else {
+        navigateTo(`https://www.twitch.tv/${channel}`);
+      }
+    });
+  }
+
+  function navigateTo(url: string) {
+     window.open(url, '_blank');
   }
 
   function scrollToAnchor(anchorId: string): void {
