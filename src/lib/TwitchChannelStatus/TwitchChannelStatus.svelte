@@ -16,7 +16,7 @@
 {#if online}
   <Card style="color: #444444; background-color: #5AFF19; align-items: center;">
     <PrimaryAction on:click={handleClick} >
-      {name} さん
+      {name}
       <br>
       ({channel})
     </PrimaryAction>
@@ -24,7 +24,7 @@
 {:else}
   <Card style="color: #FFFFFF; background-color: #444444; align-items: center;">
     <PrimaryAction on:click={handleClick} >
-      {name} さん
+      {name}
       <br>
       ({channel})
     </PrimaryAction>

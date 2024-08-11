@@ -80,7 +80,7 @@
           <Card>
             <h2 class="mdc-typography--headline6" style="margin: 0;">
               <a href="https://www.twitch.tv/{channel}" target="_blank">
-                {loadChannelName(channel)} さん
+                {loadChannelName(channel)}
               </a>
             </h2>
             <div class="embed-entry">
