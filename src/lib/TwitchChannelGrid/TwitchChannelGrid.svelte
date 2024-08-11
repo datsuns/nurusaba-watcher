@@ -79,7 +79,9 @@
         <div class="card-container" id={channel}>
           <Card>
             <h2 class="mdc-typography--headline6" style="margin: 0;">
-              {loadChannelName(channel)} さん
+              <a href="https://www.twitch.tv/{channel}" target="_blank">
+                {loadChannelName(channel)} さん
+              </a>
             </h2>
             <div class="embed-entry">
               <TwitchChannelEmbed channel={loadChannelName(channel)} id={i.toString()} live={liveStatus[i]} />
