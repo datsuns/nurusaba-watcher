@@ -13,6 +13,7 @@
 
 	let player: Twitch.Player;
 
+
 	onMount(async () => {
 		player = new Twitch.Player(`twitch-embed-${id}`, {
 			channel,

@@ -10,13 +10,14 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"prepare": "npm run smui && npm run smui-template && npm run smui-theme",
-		"smui": "npm install --save-dev smui-theme && npm i --save-dev @smui/layout-grid && npm i  --save-dev @smui/card",
+		"smui": "npm install --save-dev smui-theme && npm i --save-dev @smui/layout-grid && npm i  --save-dev @smui/card && npm i -D @smui/button",
 		"smui-template": "npx smui-theme template src/theme",
 		"smui-theme": "smui-theme compile static/smui.css -i src/theme"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^5.0.0",
 		"@neoconfetti/svelte": "^2.0.0",
+		"@smui/button": "^7.0.0",
 		"@smui/card": "^7.0.0",
 		"@smui/layout-grid": "^7.0.0",
 		"@sveltejs/adapter-auto": "^3.0.0",

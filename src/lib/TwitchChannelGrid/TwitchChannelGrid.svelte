@@ -4,35 +4,58 @@
 	import TwitchChannelEmbed from '$lib/TwitchChannelEmbed/TwitchChannelEmbed.svelte';
   import LayoutGrid, { Cell } from '@smui/layout-grid';
   import Card, { Content, PrimaryAction, Media, MediaContent, } from '@smui/card';
+  import TwitchChannelStatus from '../TwitchChannelStatus/TwitchChannelStatus.svelte'
 
-	export let channels: Array<string> = [];
+  export let channels: Map<string, string> = new Map();
 
+	let channelList: Array<string> = [];
 	const liveStatus: Array<boolean> = [];
+  let numOfOnline = 0;
 
 	onMount(async () => {
-		const promises = channels.map(isChannelLive);
+    channelList = [...channels.keys()]
+		const promises = channelList.map(isChannelLive);
 		const results = await Promise.allSettled(promises);
 		results.forEach((result, i) => {
 			if (result.status === 'fulfilled') {
 				liveStatus[i] = result.value;
+        if (result.value === true) {
+          numOfOnline = ++numOfOnline;
+        }
 			} else {
 				liveStatus[i] = false;
-			}
-		});
+      }
+    });
 	});
+
+  function loadChannelName(channel: string){
+    return channels.get(channel) ?? channel
+  }
+
 </script>
 
+<h1>
+  配信中 {numOfOnline} / {channels.size}
+</h1>
 <LayoutGrid>
-  {#each channels as channel, i}
-    {#if typeof liveStatus[i] !== 'undefined' && liveStatus[i] === true}
+  {#each channelList as channel, i}
+    <Cell  span={2}>
+      <TwitchChannelStatus online={liveStatus[i]} name={loadChannelName(channel)} />
+    </Cell>
+  {/each}
+</LayoutGrid>
+
+<LayoutGrid>
+  {#each channelList as channel, i}
+    {#if liveStatus[i] === true}
       <Cell>
         <div class="card-container">
           <Card>
             <h2 class="mdc-typography--headline6" style="margin: 0;">
-              {channel}
+              {loadChannelName(channel)}
             </h2>
             <div class="embed-entry">
-              <TwitchChannelEmbed {channel} id={i.toString()} live={liveStatus[i]} />
+              <TwitchChannelEmbed channel={loadChannelName(channel)} id={i.toString()} live={liveStatus[i]} />
             </div>
           </Card>
         </div>
