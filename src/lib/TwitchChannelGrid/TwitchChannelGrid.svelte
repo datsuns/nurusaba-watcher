@@ -1,32 +1,32 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { isChannelLive } from '$lib/TwitchUtils';
-	import TwitchChannelEmbed from '$lib/TwitchChannelEmbed/TwitchChannelEmbed.svelte';
+  import { onMount } from 'svelte';
+  import { isChannelLive } from '$lib/TwitchUtils';
+  import TwitchChannelEmbed from '$lib/TwitchChannelEmbed/TwitchChannelEmbed.svelte';
   import LayoutGrid, { Cell } from '@smui/layout-grid';
   import Card, { Content, PrimaryAction, Media, MediaContent, } from '@smui/card';
   import TwitchChannelStatus from '../TwitchChannelStatus/TwitchChannelStatus.svelte'
 
   export let channels: Map<string, string> = new Map();
 
-	let channelList: Array<string> = [];
-	const liveStatus: Array<boolean> = [];
+  let channelList: Array<string> = [];
+  const liveStatus: Array<boolean> = [];
   let numOfOnline = 0;
 
-	onMount(async () => {
+  onMount(async () => {
     channelList = [...channels.keys()]
-		const promises = channelList.map(isChannelLive);
-		const results = await Promise.allSettled(promises);
-		results.forEach((result, i) => {
-			if (result.status === 'fulfilled') {
-				liveStatus[i] = result.value;
+    const promises = channelList.map(isChannelLive);
+    const results = await Promise.allSettled(promises);
+    results.forEach((result, i) => {
+      if (result.status === 'fulfilled') {
+        liveStatus[i] = result.value;
         if (result.value === true) {
           numOfOnline = ++numOfOnline;
         }
-			} else {
-				liveStatus[i] = false;
+      } else {
+        liveStatus[i] = false;
       }
     });
-	});
+  });
 
   function loadChannelName(channel: string){
     return channels.get(channel) ?? channel
@@ -40,6 +40,7 @@
 <LayoutGrid>
   {#each channelList as channel, i}
     <Cell  span={2}>
+      <a href="#section1">Go to Section 1</a>
       <TwitchChannelStatus online={liveStatus[i]} name={loadChannelName(channel)} />
     </Cell>
   {/each}
@@ -65,15 +66,15 @@
 </LayoutGrid>
 
 <style>
-	div {
-		display: inline-flex;
-		align-items: center;
-		margin: 1rem;
-	}
+  div {
+    display: inline-flex;
+    align-items: center;
+    margin: 1rem;
+  }
 
   .embed-entry {
     height: 200px;
-		margin: 10px;
+    margin: 10px;
     background-color: var(--mdc-theme-secondary, #333);
     color: var(--mdc-theme-on-secondary, #fff);
   }
