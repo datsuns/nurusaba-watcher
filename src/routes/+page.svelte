@@ -27,7 +27,7 @@
     [ 'ww_okasama_ww', '岡様' ],
     [ 'yappy3838', 'やっぴーちゃんねる' ],
     [ 'komachi_key', '調子こきまろのこまち' ],
-    [ 'chiyonog', 'ちよ' ],
+    [ 'chiyonog', 'ちよん' ],
     [ 'okasinokoyanokoya', 'お菓子の小屋' ],
     [ 'simiryuuu', 'しみりゅー' ],
     [ 'haainico', '太陽神灰にこ' ],
