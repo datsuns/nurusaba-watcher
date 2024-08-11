@@ -28,6 +28,19 @@
     });
   });
 
+  // 子コンポーネントからのイベントをハンドルする関数
+  function handleStatusClicked(event: CustomEvent) {
+    console.log(event.detail.message);
+    scrollToAnchor(event.detail.message);
+  }
+
+  function scrollToAnchor(anchorId: string): void {
+    const element = document.getElementById(anchorId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   function loadChannelName(channel: string){
     return channels.get(channel) ?? channel
   }
@@ -40,8 +53,7 @@
 <LayoutGrid>
   {#each channelList as channel, i}
     <Cell  span={2}>
-      <a href="#section1">Go to Section 1</a>
-      <TwitchChannelStatus online={liveStatus[i]} name={loadChannelName(channel)} />
+      <TwitchChannelStatus channel={channel} online={liveStatus[i]} name={loadChannelName(channel)} on:customEvent={handleStatusClicked} />
     </Cell>
   {/each}
 </LayoutGrid>
@@ -50,7 +62,7 @@
   {#each channelList as channel, i}
     {#if liveStatus[i] === true}
       <Cell>
-        <div class="card-container">
+        <div class="card-container" id={channel}>
           <Card>
             <h2 class="mdc-typography--headline6" style="margin: 0;">
               {loadChannelName(channel)}
