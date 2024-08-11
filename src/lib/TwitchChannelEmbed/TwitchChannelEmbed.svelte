@@ -9,7 +9,6 @@
 	export let muted = true;
 	export let parent = 'localhost';
 	export let id: string;
-	export let live: boolean;
 
 	let player: Twitch.Player;
 
@@ -32,12 +31,5 @@
 <style>
 	.twitch-embed {
 		aspect-ratio: 16/9;
-	}
-
-	.live-marker {
-		position: absolute;
-		top: 0;
-		right: 0.5rem;
-		z-index: 1;
 	}
 </style>
