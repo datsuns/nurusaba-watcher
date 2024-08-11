@@ -84,7 +84,7 @@
               </a>
             </h2>
             <div class="embed-entry">
-              <TwitchChannelEmbed channel={loadChannelName(channel)} id={i.toString()} live={liveStatus[i]} />
+              <TwitchChannelEmbed channel={channel} id={i.toString()} live={liveStatus[i]} />
             </div>
           </Card>
         </div>
