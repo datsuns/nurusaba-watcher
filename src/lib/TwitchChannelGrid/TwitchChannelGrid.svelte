@@ -9,11 +9,13 @@
   export let channels: Map<string, string> = new Map();
 
   let channelList: Array<string> = [];
+  let channeNamelList: Array<string> = [];
   const liveStatus: Array<boolean> = [];
   let numOfOnline = 0;
 
   onMount(async () => {
-    channelList = [...channels.keys()]
+    channeNamelList = [...channels.keys()]
+    channelList = [...channels.values()]
     const promises = channelList.map(isChannelLive);
     const results = await Promise.allSettled(promises);
     results.forEach((result, i) => {
@@ -55,36 +57,35 @@
     }
   }
 
-  function loadChannelName(channel: string){
-    return channels.get(channel) ?? channel
+  function loadChannelId(name: string){
+    return channels.get(name) ?? name
   }
-
 </script>
 
 <h1>
   配信中 {numOfOnline} / {channels.size}
 </h1>
 <LayoutGrid>
-  {#each channelList as channel, i}
+  {#each channeNamelList as name, i}
     <Cell span={2}>
-      <TwitchChannelStatus channel={channel} online={liveStatus[i]} name={loadChannelName(channel)} on:customEvent={handleStatusClicked} />
+      <TwitchChannelStatus channel={loadChannelId(name)} online={liveStatus[i]} name={name} on:customEvent={handleStatusClicked} />
     </Cell>
   {/each}
 </LayoutGrid>
 
 <LayoutGrid>
-  {#each channelList as channel, i}
+  {#each channeNamelList as name, i}
     {#if liveStatus[i] === true}
       <Cell>
-        <div class="card-container" id={channel}>
+        <div class="card-container" id={loadChannelId(name)}>
           <Card>
             <h2 class="mdc-typography--headline6" style="margin: 0;">
-              <a href="https://www.twitch.tv/{channel}" target="_blank">
-                {loadChannelName(channel)}
+              <a href="https://www.twitch.tv/{loadChannelId(name)}" target="_blank">
+                {name}
               </a>
             </h2>
             <div class="embed-entry">
-              <TwitchChannelEmbed channel={channel} id={i.toString()} />
+              <TwitchChannelEmbed channel={loadChannelId(name)} id={i.toString()} />
             </div>
           </Card>
         </div>
